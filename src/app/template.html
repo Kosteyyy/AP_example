@@ -1,47 +1,49 @@
-<div class="p-2">
-  <form #form="ngForm" (ngSubmit)="submitForm(form)">
-    <div
-      class="bg-danger text-white p-2 mb-2"
-      *ngIf="formSubmitted && form.invalid"
-    >
-      There are problems with the form
-      <ul>
-        <li *ngFor="let error of getFormValidationMessages(form)">{{error}}</li>
-      </ul>
-    </div>
-    <div class="form-group">
-      <label>Name</label>
-      <input
-        class="form-control"
-        name="name1"
-        [(ngModel)]="newProduct.name"
-        #name="ngModel"
-        required
-        minlength="5"
-        pattern="^[A-Za-z ]+$"
-      />
-      <!-- <ul
-        class="text-danger list-unstyled mt-1"
-        *ngIf="(form.submitted || form.dirty) && name.invalid"
-      >
-        <li *ngFor="let error of getValidationMessages(name)">{{error}}</li>
-      </ul> -->
-    </div>
-    <div class="form-group">
-    <label>Category</label>
-    <input class="form-control" name="category" [(ngModel)]="newProduct.category"  required/>
+<div class="row p-2">
+  <div class="col-6">
+    <form class="m-2" (ngSubmit)="submitForm()">
+      <div class="form-group">
+        <label>Name</label>
+        <input class="form-control" name="name" [(ngModel)]="newProduct.name" />
+      </div>
+      <div class="form-group">
+        <label>Category</label>
+        <input
+          class="form-control"
+          name="category"
+          [(ngModel)]="newProduct.category"
+        />
+      </div>
+      <div class="form-group">
+        <label>Price</label>
+        <input
+          class="form-control"
+          name="price"
+          [(ngModel)]="newProduct.price"
+        />
+      </div>
+      <button class="btn btn-primary" type="submit">Create</button>
+    </form>
   </div>
-  <div class="form-group">
-    <label>Price</label>
-    <input class="form-control"  name="price" [(ngModel)]="newProduct.price" required type="number"/>
+
+  <div class="col">
+    <table class="table table-sm table-bordered table-striped">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of getProducts(); let i = index" pa-attr>
+          <td>{{i + 1}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.category}}</td>
+          <td>{{item.price}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-    <button
-      class="btn btn-primary mt-2"
-      type="submit"
-      [disabled]="formSubmitted && form.invalid"
-      [class.btn-secondary]="formSubmitted && form.invalid"
-    >
-      Create
-    </button>
-  </form>
 </div>
