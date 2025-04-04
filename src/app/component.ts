@@ -26,5 +26,7 @@ export class ProductComponent {
 
   submitForm() {
     this.addProduct(this.newProduct);
+    this.newProduct = new Product();
+    console.log("🚀 ~ ProductComponent ~ submitForm ~ this.newProduct:", this.newProduct, this.getProducts())
   }
 }
