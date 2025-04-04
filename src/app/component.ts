@@ -9,15 +9,6 @@ import { Product } from './product.model';
 export class ProductComponent {
   model: Model = new Model();
 
-  constructor(ref: ApplicationRef) {
-    (<any>window).appRef = ref;
-    (<any>window).model = this.model;
-  }
-
-  getProductByPosition(position: number): Product {
-    return this.model.getProducts()[position];
-  }
-
   getProduct(key: number): Product | undefined {
     return this.model.getProduct(key);
   }
@@ -26,13 +17,15 @@ export class ProductComponent {
     return this.model.getProducts();
   }
 
-  getProductCount(): number {
-    return this.getProducts().length;
+  selectedProduct: string | undefined;
+
+  getSelected(product: Product): boolean {
+    return product.name == this.selectedProduct;
   }
 
-  targetName: string = 'Kayak';
-
-  getKey(index: number, product: Product) {
-    return product.id;
-  }
+  handleInputEvent(ev: Event) {
+    if (ev.target instanceof HTMLInputElement) {
+    this.selectedProduct = ev.target.value
+    }
+    }
 }
