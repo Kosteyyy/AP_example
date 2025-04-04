@@ -1,9 +1,11 @@
-import { Directive, ElementRef } from '@angular/core';
+import { Attribute, Directive, ElementRef } from '@angular/core';
 
 @Directive({ selector: '[pa-attr]' })
 export class PaAttrDirective {
-  constructor(element: ElementRef) {
-    element.nativeElement.classList.add('table-success', 'fw-bold');
-    console.log("🚀 ~ PaAttrDirective ~ constructor ~ element:", element)
+  // constructor(element: ElementRef, @Attribute("pa-attr-class") bgClass: string) {
+  //   element.nativeElement.classList.add(bgClass || 'table-success', 'fw-bold');
+  // }
+  constructor(element: ElementRef, @Attribute("pa-attr") bgClass: string) {
+    element.nativeElement.classList.add(bgClass || 'table-success', 'fw-bold');
   }
 }
