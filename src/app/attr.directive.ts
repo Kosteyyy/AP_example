@@ -2,27 +2,35 @@ import {
   Attribute,
   Directive,
   ElementRef,
+  EventEmitter,
   Input,
+  Output,
   SimpleChanges,
 } from '@angular/core';
+import { Product } from './product.model';
 
 @Directive({ selector: '[pa-attr]' })
 export class PaAttrDirective {
-  // constructor(element: ElementRef, @Attribute("pa-attr-class") bgClass: string) {
-  //   element.nativeElement.classList.add(bgClass || 'table-success', 'fw-bold');
-  // }
-  constructor(private element: ElementRef) {}
+
+  constructor(private element: ElementRef) {
+    this.element.nativeElement.addEventListener('click', () => {
+      if (this.product != null) {
+        this.click.emit(this.product.category);
+      }
+    });
+  }
+
   @Input('pa-attr')
   bgClass: string | null = '';
-  // ngOnInit() {
-  //   this.element.nativeElement.classList.add(
-  //     this.bgClass || 'table-success',
-  //     'fw-bold'
-  //   );
-  // }
+
+  @Input('pa-product')
+  product: Product = new Product();
+
+  @Output('pa-category')
+  click = new EventEmitter<string>();
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("🚀 ~ PaAttrDirective ~ ngOnChanges ~ changes:", changes)
+    console.log('🚀 ~ PaAttrDirective ~ ngOnChanges ~ changes:', changes);
     let change = changes['bgClass'];
     let classList = this.element.nativeElement.classList;
     if (!change.isFirstChange() && classList.contains(change.previousValue)) {
