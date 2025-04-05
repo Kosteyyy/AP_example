@@ -1,45 +1,11 @@
-<div class="row p-2">
-  <div class="col-6">
-    <form class="m-2" (ngSubmit)="submitForm()">
-      <div class="form-group">
-        <label>Name</label>
-        <input class="form-control" name="name" [(ngModel)]="newProduct.name" />
-      </div>
-      <div class="form-group">
-        <label>Category</label>
-        <input
-          class="form-control"
-          name="category"
-          [(ngModel)]="newProduct.category"
-        />
-      </div>
-      <div class="form-group">
-        <label>Price</label>
-        <input
-          class="form-control"
-          name="price"
-          [(ngModel)]="newProduct.price"
-        />
-      </div>
-      <button class="btn btn-primary" type="submit">Create</button>
-    </form>
+<div class="p-2">
+  <div class="form-check m-2">
+    <input type="checkbox" class="form-check-input" [(ngModel)]="showTable" />
+    <label class="form-check-label">Show Table</label>
   </div>
 
-  <div class="col">
-    <div class="form-group bg-info text-white p-2">
-      <label>Name:</label>
-      <!-- <input
-        class="bg-primary text-white form-control"
-        [paModel]="newProduct.name"
-        (paModelChange)="newProduct.name = $event"
-      /> -->
-      <input
-        class="bg-primary text-white form-control"
-        [(paModel)]="newProduct.name" #paModel="paModel"
-      />
-      <div class="bg-info text-white p-1">Direction: {{paModel.direction}}</div>
-    </div>
-    <table class="table table-sm table-bordered table-striped">
+  <ng-template [paIf]="showTable">
+    <table class="table table-bordered table-striped">
       <thead>
         <tr>
           <th></th>
@@ -48,15 +14,6 @@
           <th>Price</th>
         </tr>
       </thead>
-
-      <!-- <tbody>
-        <tr *ngFor="let item of getProducts(); let i = index">
-          <td pa-attr>{{i + 1}}</td>
-          <td pa-attr>{{item.name}}</td>
-          <td  pa-attr  pa-attr-class="table-warning">{{item.category}}</td>
-          <td  pa-attr  pa-attr-class="table-info">{{item.price}}</td>
-        </tr>
-      </tbody> -->
       <tbody>
         <tr
           *ngFor="let item of getProducts(); let i = index"
@@ -73,5 +30,5 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </ng-template>
 </div>
