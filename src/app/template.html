@@ -35,8 +35,9 @@
       /> -->
       <input
         class="bg-primary text-white form-control"
-        [(paModel)]="newProduct.name"
+        [(paModel)]="newProduct.name" #paModel="paModel"
       />
+      <div class="bg-info text-white p-1">Direction: {{paModel.direction}}</div>
     </div>
     <table class="table table-sm table-bordered table-striped">
       <thead>
