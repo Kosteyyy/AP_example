@@ -25,9 +25,17 @@ export class ProductComponent {
     this.model.saveProduct(p);
   }
 
+  deleteProduct(key: number) {
+    this.model.deleteProduct(key);
+  }
+
   submitForm() {
     this.addProduct(this.newProduct);
     this.newProduct = new Product();
-    console.log("🚀 ~ ProductComponent ~ submitForm ~ this.newProduct:", this.newProduct, this.getProducts())
+    // console.log(
+    //   '🚀 ~ ProductComponent ~ submitForm ~ this.newProduct:',
+    //   this.newProduct,
+    //   this.getProducts()
+    // );
   }
 }

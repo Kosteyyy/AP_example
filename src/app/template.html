@@ -38,23 +38,30 @@
             <th>Name</th>
             <th>Category</th>
             <th>Price</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
-          <ng-template
-            [paForOf]="getProducts()"
-            let-item
-            let-i="index"
-            let-odd="odd"
-            let-even="even"
+          <tr
+            *paFor="let item of getProducts(); let i = index; let odd = odd;
+let even = even"
+            [class.table-info]="odd"
+            [class.table-warning]="even"
+            class="align-middle"
           >
-            <tr [class.table-info]="odd" [class.table-warning]="even">
-              <td>{{i + 1}}</td>
-              <td>{{item.name}}</td>
-              <td>{{item.category}}</td>
-              <td>{{item.price}}</td>
-            </tr>
-          </ng-template>
+            <td>{{i + 1}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.category}}</td>
+            <td>{{item.price}}</td>
+            <td class="text-center">
+              <button
+                class="btn btn-danger btn-sm"
+                (click)="deleteProduct(item.id)"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
           <!-- <tr
           *ngFor="let item of getProducts(); let i = index"
           [pa-attr]="getProducts().length < 6 ? 'table-success' : 'table-warning'"
