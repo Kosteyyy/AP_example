@@ -15,12 +15,12 @@ import { DiscountService } from './discount.service';
   templateUrl: 'ProductTable.component.html',
 })
 export class ProductTableComponent implements OnInit {
-  @Input('model')
-  dataModel: Model | undefined;
+  // @Input('model')
+  // dataModel: Model | undefined;
 
   // discounter: DiscountService = new DiscountService();
 
-  constructor() {}
+  constructor(private dataModel: Model) { }
 
   ngOnInit() {}
 
