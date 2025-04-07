@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { Model } from './repository.model';
 import { Product } from './product.model';
+import { DiscountService } from './discount.service';
 // import { PaCellColor } from './cellColor.directive';
 
 @Component({
@@ -16,6 +17,8 @@ import { Product } from './product.model';
 export class ProductTableComponent implements OnInit {
   @Input('model')
   dataModel: Model | undefined;
+
+  // discounter: DiscountService = new DiscountService();
 
   constructor() {}
 
