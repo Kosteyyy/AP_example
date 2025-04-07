@@ -14,6 +14,14 @@ import { PaCellColorSwitcher } from './cellColorSwitcher.directive';
 import { ProductTableComponent } from './productTable.component';
 import { ProductFormComponent } from './productForm.component';
 import { ToggleViewComponent } from './toggleView.component';
+import { PaAddTaxPipe } from './addTax.pipe';
+import { PaCategoryFilterPipe } from './categoryFilter.pipe';
+
+import { LOCALE_ID } from "@angular/core";
+import localeFr from '@angular/common/locales/fr';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeFr);
+
 
 @NgModule({
   declarations: [
@@ -28,6 +36,8 @@ import { ToggleViewComponent } from './toggleView.component';
     ProductTableComponent,
     ProductFormComponent,
     ToggleViewComponent,
+    PaAddTaxPipe,
+    PaCategoryFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -35,7 +45,7 @@ import { ToggleViewComponent } from './toggleView.component';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: "fr-FR" }],
   bootstrap: [ProductComponent],
 })
 export class AppModule {}
