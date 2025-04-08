@@ -1,11 +1,14 @@
 import { Inject, Injectable } from '@angular/core';
-import { LOG_SERVICE, LogService } from './log.service';
+import { LOG_SERVICE, LogLevel, LogService } from './log.service';
 
 @Injectable()
 export class DiscountService {
   private discountValue: number = 10;
+  private logger?: LogService;
 
-  constructor(@Inject(LOG_SERVICE) private logger: LogService) {}
+  constructor(@Inject(LOG_SERVICE) private loggers: LogService[]) {
+    this.logger = loggers.find(l => l.minimumLevel == LogLevel.DEBUG)
+  }
 
   public get discount(): number {
     return this.discountValue;
@@ -16,7 +19,7 @@ export class DiscountService {
   }
 
   public applyDiscount(price: number) {
-    this.logger.logInfoMessage(`Discount ${this.discount}`
+    this.logger?.logInfoMessage(`Discount ${this.discount}`
       + ` applied to price: ${price}`);
     return Math.max(price - this.discountValue, 5);
   }
