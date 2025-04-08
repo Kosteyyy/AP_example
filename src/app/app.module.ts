@@ -27,6 +27,7 @@ import { PaDiscountPipe } from './discount.pipe';
 import { PaDiscountAmountDirective } from './discountAmount.directive';
 import { SimpleDataSource } from './datasource.model';
 import { Model } from './repository.model';
+import { LogService } from './log.service';
 registerLocaleData(localeFr);
 
 
@@ -56,7 +57,7 @@ registerLocaleData(localeFr);
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [{ provide: LOCALE_ID, useValue: "en-US" }, DiscountService, SimpleDataSource, Model],
+  providers: [{ provide: LOCALE_ID, useValue: "en-US" }, DiscountService, SimpleDataSource, Model, {provide: "logger", useClass: LogService}],
   bootstrap: [ProductComponent],
 })
 export class AppModule {}
