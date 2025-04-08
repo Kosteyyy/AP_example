@@ -4,7 +4,9 @@ export enum LogLevel {
   ERROR,
 }
 
-import { Injectable } from '@angular/core';
+import { Injectable, InjectionToken } from '@angular/core';
+
+export const LOG_SERVICE = new InjectionToken("logger")
 
 @Injectable()
 export class LogService {
