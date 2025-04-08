@@ -27,8 +27,16 @@ import { PaDiscountPipe } from './discount.pipe';
 import { PaDiscountAmountDirective } from './discountAmount.directive';
 import { SimpleDataSource } from './datasource.model';
 import { Model } from './repository.model';
-import { LOG_SERVICE, LogService, SpecialLogService } from './log.service';
+import {
+  LOG_SERVICE,
+  LogLevel,
+  LogService,
+  SpecialLogService,
+} from './log.service';
 registerLocaleData(localeFr);
+
+let logger = new LogService();
+logger.minimumLevel = LogLevel.DEBUG;
 
 @NgModule({
   declarations: [
@@ -61,8 +69,7 @@ registerLocaleData(localeFr);
     DiscountService,
     SimpleDataSource,
     Model,
-    { provide: LOG_SERVICE, useClass: LogService, multi: true },
-    { provide: LOG_SERVICE, useClass: SpecialLogService, multi: true },
+    { provide: LogService, useValue: logger },
   ],
   bootstrap: [ProductComponent],
 })
