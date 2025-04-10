@@ -28,6 +28,7 @@ import { PaDiscountAmountDirective } from './discountAmount.directive';
 import { SimpleDataSource } from './datasource.model';
 import { Model } from './repository.model';
 import { LOG_LEVEL, LOG_SERVICE, LogLevel, LogService } from './log.service';
+import { paDisplayVaslueDirective, VALUE_SERVICE } from './valueDisplay.directive';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -49,6 +50,7 @@ registerLocaleData(localeFr);
     PaDiscountEditorComponent,
     PaDiscountPipe,
     PaDiscountAmountDirective,
+    paDisplayVaslueDirective
   ],
   imports: [
     BrowserModule,
@@ -61,6 +63,7 @@ registerLocaleData(localeFr);
     DiscountService,
     SimpleDataSource,
     Model,
+    { provide: VALUE_SERVICE, useValue: "Apples"},
     { provide: LOG_LEVEL, useValue: LogLevel.ERROR },
     { provide: 'debugLevel', useExisting: LOG_LEVEL },
     {
