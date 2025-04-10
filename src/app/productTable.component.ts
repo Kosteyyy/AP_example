@@ -8,11 +8,13 @@ import {
 import { Model } from './repository.model';
 import { Product } from './product.model';
 import { DiscountService } from './discount.service';
+import { LogService } from './log.service';
 // import { PaCellColor } from './cellColor.directive';
 
 @Component({
   selector: 'paProductTable',
   templateUrl: 'ProductTable.component.html',
+  providers: [LogService]
 })
 export class ProductTableComponent implements OnInit {
   // @Input('model')

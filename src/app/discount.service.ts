@@ -5,7 +5,7 @@ import { LOG_SERVICE, LogService } from './log.service';
 export class DiscountService {
   private discountValue: number = 10;
 
-  constructor(@Inject(LOG_SERVICE) private logger: LogService) {}
+  constructor(private logger: LogService) {}
 
   public get discount(): number {
     return this.discountValue;

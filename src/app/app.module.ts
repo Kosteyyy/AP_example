@@ -17,7 +17,7 @@ import { ToggleViewComponent } from './toggleView.component';
 import { PaAddTaxPipe } from './addTax.pipe';
 import { PaCategoryFilterPipe } from './categoryFilter.pipe';
 
-import { LOCALE_ID } from "@angular/core";
+import { LOCALE_ID } from '@angular/core';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
 import { PaDiscountDisplayComponent } from './discount.component';
@@ -27,9 +27,8 @@ import { PaDiscountPipe } from './discount.pipe';
 import { PaDiscountAmountDirective } from './discountAmount.directive';
 import { SimpleDataSource } from './datasource.model';
 import { Model } from './repository.model';
-import { LOG_SERVICE, LogService } from './log.service';
+import { LOG_LEVEL, LOG_SERVICE, LogLevel, LogService } from './log.service';
 registerLocaleData(localeFr);
-
 
 @NgModule({
   declarations: [
@@ -49,7 +48,7 @@ registerLocaleData(localeFr);
     PaDiscountDisplayComponent,
     PaDiscountEditorComponent,
     PaDiscountPipe,
-    PaDiscountAmountDirective
+    PaDiscountAmountDirective,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +56,23 @@ registerLocaleData(localeFr);
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [{ provide: LOCALE_ID, useValue: "en-US" }, DiscountService, SimpleDataSource, Model, {provide: LOG_SERVICE, useClass: LogService}],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'en-US' },
+    DiscountService,
+    SimpleDataSource,
+    Model,
+    { provide: LOG_LEVEL, useValue: LogLevel.ERROR },
+    { provide: 'debugLevel', useExisting: LOG_LEVEL },
+    {
+      provide: LogService,
+      deps: ['debugLevel'],
+      useFactory: (level: LogLevel) => {
+        let logger = new LogService();
+        logger.minimumLevel = level;
+        return logger;
+      },
+    },
+  ],
   bootstrap: [ProductComponent],
 })
 export class AppModule {}

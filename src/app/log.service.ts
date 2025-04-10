@@ -6,13 +6,20 @@ export enum LogLevel {
 
 import { Injectable, InjectionToken } from '@angular/core';
 
-export const LOG_SERVICE = new InjectionToken("logger")
+export const LOG_SERVICE = new InjectionToken('logger');
+export const LOG_LEVEL = new InjectionToken('log_level');
 
 @Injectable()
 export class LogService {
   minimumLevel = LogLevel.INFO;
 
-  constructor() {}
+  constructor() {
+    console.log('СОЗДАН ЛОГ_СЕРВИС (КОНСТРУКТОР), minLevel: ', this.minimumLevel);
+  }
+
+  ngOnInit() {
+    console.log('СОЗДАН ЛОГ_СЕРВИС, minLevel: ', this.minimumLevel);
+  }
 
   logInfoMessage(message: string) {
     this.logMessage(LogLevel.INFO, message);
